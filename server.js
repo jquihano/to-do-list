@@ -14,7 +14,13 @@ app.set("view engine", "ejs");
 app.use(express.static('publix'));
 app.use(express.urlencoded({extended: true}));
 
-mongoose.connect(process.env.DB_CONNECTION)
+mongoose.connect(process.env.DB_CONNECTION, 
+    {useNewUrlParser: true},
+    () => {console.log(`Connected to the db!`)}
+);
+
+
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on PORT ${PORT}`)
