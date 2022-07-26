@@ -13,3 +13,9 @@ require('dotenv').config()
 app.set("view engine", "ejs");
 app.use(express.static('publix'));
 app.use(express.urlencoded({extended: true}));
+
+mongoose.connect(process.env.DB_CONNECTION)
+
+app.listen(PORT, () => {
+    console.log(`Server is running on PORT ${PORT}`)
+});
