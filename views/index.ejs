@@ -23,13 +23,21 @@
     />
   </head>
   <body>
-    <section class="todo-container">
-      <h1>To Do List</h1>
-      <form action="/" method="post" class="todo-header">
-        <input type="text" placeholder="Title" name="title" />
-        <textarea name="content" id="" cols="30" rows="6">Content</textarea>
-        <button type="submit">Add Item</button>
+    <section class="todo">
+      <form action="/" method="POST" class="todo-header">
+          <input type="text" name="title" placeholder="title">
+          <textarea rows="6" cols="45" name="content" placeholder="content"></textarea>
+          <button type="submit"><span class="fas fa-plus">Add Task</span></button>
       </form>
-    </section>
+      <ul class="todo-list">
+        <% todoTasks.forEach(task => {%>
+          <li class="todo-list-item">
+            <div class="todo-list-item-title">
+              <%= task.title %>
+              <%= task.content %>
+            </div>
+          </li>
+        <%}) %>
+      </ul>
   </body>
 </html>
