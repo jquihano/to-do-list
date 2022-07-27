@@ -23,25 +23,31 @@
     />
   </head>
   <body>
-    <section class="todo">
-      <form action="/" method="POST" class="todo-header">
-          <input type="text" name="title" placeholder="title">
-          <textarea rows="6" cols="45" name="content" placeholder="content"></textarea>
-          <button type="submit"><span class="fas fa-plus">Add Task</span></button>
-      </form>
-      <ul class="todo-list">
-        <% todoTasks.forEach(task => {%>
+    <section class="todo-container">
+      <h2>To Do List</h2>
+      <section class="todo">
+        <form action="/" method="POST" class="todo-header">
+          <input type="text" name="title" value="title" />
+          <textarea rows="6" cols="45" name="content">content</textarea>
+          <button type="submit">
+            <span class="fas fa-plus">Add Task</span>
+          </button>
+        </form>
+        <ul class="todo-list">
+          <% todoTasks.forEach(details => { %>
           <li class="todo-list-item">
-            <div class="todo-list-item-title">
-              <%= task.content %>
-            </div>
-            <div class="todo-list-item-content">
-              <%= task.content %>
-            </div>
-            <a href="/edit/<%=task._id %>" class="edit"><span class="fas fa-pencil"></span></a>
-            <a href="/remove/<%=task._id %>" class="remove"><span class="fas fa-trash"></span></a>
+            <div class="todo-list-item-title"><%= details.title %></div>
+            <div class="todo-list-item-content"><%= details.content %></div>
+            <a href="/edit/<%= details._id %>" class="edit">
+              <span class="fas fa-edit"></span>
+            </a>
+            <a href="/remove/<%= details._id %>" class="remove">
+              <span class="fas fa-times"></span>
+            </a>
           </li>
-        <%}) %>
-      </ul>
+          <% }) %>
+        </ul>
+      </section>
+    </section>
   </body>
 </html>
