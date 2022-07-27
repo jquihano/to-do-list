@@ -50,31 +50,45 @@ app.post('/', async (req, res) => {
 });
 
 //EDIT or UPDATE METHOD
-app
+app.post('/', async (req, res) => {
+    const todoTask = new TodoTask(
+        {
+            title: req.body.title,
+            content: req.body.content
+        });
+    try {
+        await todoTask.save();
+        console.log(todoTask)
+        res.redirect("/");
+    } catch (err) {
+        if (err) return res.status(500).send(err);
+        res.redirect("/");
+    }
+});
 
-    .route("/edit/id")
+//UPDATE METHOD
+app
+    .route("/edit/:id")
     .get((req, res) => {
-        const id = req.params.id
+        const id = req.params.id;
         TodoTask.find({}, (err, tasks) => {
-            res.render('edit.ejs', {
-                todoTasks: tasks, idTask: id
-            })
-        })
-        .post((req, res) => {
-            const id = req.params.id
-            TodoTask.findByIdAndUpdate(
-                id, 
-                {
-                    title: req.body.title,
-                    content: req.body.content
-                },
-                err => {
-                    if(err) return res.status(500).send(err)
-                    res.redirect('/')
-                }
-            )
-        })
+            res.render("edit.ejs", { todoTasks: tasks, idTask: id });
+        });
     })
+    .post((req, res) => {
+        const id = req.params.id;
+        TodoTask.findByIdAndUpdate(
+            id,
+            {
+                title: req.body.title,
+                content: req.body.content
+            },
+
+            err => {
+                if (err) return res.status(500).send(err);
+                res.redirect("/");
+            });
+    });
 
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
