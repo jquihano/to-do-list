@@ -1,38 +1,33 @@
 //-----
 //DECLARE VARIABLES
 //-----
-const express = require('express');
+const express = require("express");
 const app = express();
-const PORT = 1234;
-const mongoose = require('mongoose');
-
+const PORT = 1337;
+const mongoose = require("mongoose");
+const TodoTask = require("./models/TodoTask");
 require('dotenv').config()
-const ToDoTask = require('./models/todotask')
 
-
-//-----
-//SET MIDDLEWARE
-//-----
+//Set Middleware
 app.set("view engine", "ejs");
-app.use(express.static('publix'));
-app.use(express.urlencoded({extended: true}));
+app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect(process.env.DB_CONNECTION, 
-    {useNewUrlParser: true},
-    () => {console.log(`Connected to the db!`)}
-);
+//Connect to Mongo
+mongoose.connect(
+    process.env.DB_CONNECTION, 
+    { useNewUrlParser: true }, 
+    () => {console.log("Connected to db!");}
+)
 
-app.get('/', async (req, res) => {
+// GET METHOD
+app.get('/', async (request, response) => {
     try {
-        ToDoTask.find({}, (err, tasks) => {
-            res.render('index.ejs', {todoTasks: tasks})
-        })
+        response.render('index.ejs')
     } catch (error) {
-        if(err) return res.status(500).send(err)
+        response.status(500).send({message: error.message})
     }
 })
 
 
-app.listen(PORT, () => {
-    console.log(`Server is running on PORT ${PORT}`)
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
