@@ -33,9 +33,13 @@
         <% todoTasks.forEach(task => {%>
           <li class="todo-list-item">
             <div class="todo-list-item-title">
-              <%= task.title %>
               <%= task.content %>
             </div>
+            <div class="todo-list-item-content">
+              <%= task.content %>
+            </div>
+            <a href="/edit/<%=task._id %>" class="edit"><span class="fas fa-pencil"></span></a>
+            <a href="/remove/<%=task._id %>" class="remove"><span class="fas fa-trash"></span></a>
           </li>
         <%}) %>
       </ul>
