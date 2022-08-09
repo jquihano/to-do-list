@@ -3,7 +3,7 @@
 //-----
 const express = require("express");
 const app = express();
-const PORT = 1337;
+const PORT = process.env.PORT || 1337;
 const mongoose = require("mongoose");
 const TodoTask = require("./models/TodoTask");
 require('dotenv').config()
