@@ -71,3 +71,35 @@ ul {
     border-radius: 5px;
     display: flex;
 }
+
+.todo-list-item-title {
+    
+    
+}
+
+.todo-list-item-content {
+    font-size: 1.2rem;
+    margin: 0 10px;
+}
+
+.todo-list-item form {
+    width: 100%;
+    display: flex;
+}
+
+.todo-list-item input {
+    flex-grow: 2;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
+.todo-list-item .confirm {
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px;
+    background-color: blanchedalmond;
+    margin-left: 5px;
+}
